@@ -3,6 +3,7 @@ package com.viordache.store.controllers;
 import com.viordache.store.entities.User;
 import com.viordache.store.services.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> authenticatedUser() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -29,7 +31,8 @@ public class UserController {
 
         return ResponseEntity.ok(currentUser);
     }
-    @GetMapping("")
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     public ResponseEntity<List<User>> allUsers() {
 
         return ResponseEntity.ok(userService.allUsers());

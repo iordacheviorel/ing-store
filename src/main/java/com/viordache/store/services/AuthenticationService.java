@@ -3,7 +3,10 @@ package com.viordache.store.services;
 
 import com.viordache.store.dtos.LoginUserDto;
 import com.viordache.store.dtos.RegisterUserDto;
+import com.viordache.store.entities.Role;
+import com.viordache.store.entities.RoleEnum;
 import com.viordache.store.entities.User;
+import com.viordache.store.repositories.RoleRepository;
 import com.viordache.store.repositories.UserRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -11,6 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthenticationService {
@@ -21,20 +26,31 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
 
+    private final RoleRepository roleRepository;
+
     public AuthenticationService(UserRepository userRepository,
                                  PasswordEncoder passwordEncoder,
-                                 AuthenticationManager authenticationManager) {
+                                 AuthenticationManager authenticationManager, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.roleRepository = roleRepository;
     }
 
     public User signUp(RegisterUserDto registerUserDto) {
+
+        Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.USER);
+
+        if (optionalRole.isEmpty()) {
+            // TODO throw error when role is not found?
+            return null;
+        }
 
         var user = new User();
         user.setFullName(registerUserDto.getFullName());
         user.setEmail(registerUserDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
+        user.setRole(optionalRole.get());
 
         try {
             return userRepository.save(user);
