@@ -5,7 +5,6 @@ import com.viordache.store.entities.RoleEnum;
 import com.viordache.store.repositories.RoleRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
