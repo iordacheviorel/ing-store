@@ -18,59 +18,67 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleSecurityException(Exception exception) {
-        ProblemDetail errorDetail = null;
 
-        // Logs the exception
+        // Log the exception
+        // TODO implement logging
         exception.printStackTrace();
 
+        return switch (exception) {
 
-        // JWT exceptions
-        if (exception instanceof SignatureException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-            errorDetail.setProperty("description", "The JWT signature is invalid");
-        }
+            // JWT exceptions
+            case SignatureException e -> createProblemDetail(
+                    403,
+                    e.getMessage(),
+                    "The JWT signature is invalid"
+            );
 
-        if (exception instanceof ExpiredJwtException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-            errorDetail.setProperty("description", "The JWT token has expired");
-        }
+            case ExpiredJwtException e -> createProblemDetail(
+                    403,
+                    e.getMessage(),
+                    "The JWT token has expired"
+            );
 
-        if(exception instanceof MalformedJwtException){
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-            errorDetail.setProperty("description", "The JWT token has been malformed");
-        }
+            case MalformedJwtException e -> createProblemDetail(
+                    403,
+                    e.getMessage(),
+                    "The JWT token has been malformed"
+            );
 
-        // Spring Security exceptions
-        if (exception instanceof BadCredentialsException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), exception.getMessage());
-            errorDetail.setProperty("description", "The username or password is incorrect");
+            // Spring Security exceptions
+            case BadCredentialsException e -> createProblemDetail(
+                    401,
+                    e.getMessage(),
+                    "The username or password is incorrect"
+            );
 
-            return errorDetail;
-        }
+            case AccountStatusException e -> createProblemDetail(
+                    403,
+                    e.getMessage(),
+                    "The account is locked"
+            );
 
-        if (exception instanceof AccountStatusException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-            errorDetail.setProperty("description", "The account is locked");
-        }
+            case AccessDeniedException e -> createProblemDetail(
+                    403,
+                    e.getMessage(),
+                    "You are not authorized to access this resource");
 
-        if (exception instanceof AccessDeniedException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-            errorDetail.setProperty("description", "You are not authorized to access this resource");
-        }
+            // other
+            case DuplicateKeyException e -> createProblemDetail(
+                    409,
+                    "The resource has already been created.",
+                    "The resource has already been created.");
 
-        // other
+            default -> createProblemDetail(
+                    500,
+                    exception.getMessage(),
+                    "Unknown internal server error.");
+        };
+    }
 
-        if (exception instanceof DuplicateKeyException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(409), exception.getMessage());
-            errorDetail.setProperty("description", "The resource has already been created");
-            errorDetail.setDetail("The resource has already been created");
-        }
+    public ProblemDetail createProblemDetail(Integer httpStatus, String message, String description) {
 
-        if (errorDetail == null) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
-            errorDetail.setProperty("description", "Unknown internal server error.");
-        }
-
-        return errorDetail;
+        ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(httpStatus), message);
+        pd.setProperty("description", description);
+        return pd;
     }
 }
