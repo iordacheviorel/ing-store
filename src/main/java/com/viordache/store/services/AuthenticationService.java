@@ -5,6 +5,8 @@ import com.viordache.store.dtos.LoginUserDto;
 import com.viordache.store.dtos.RegisterUserDto;
 import com.viordache.store.entities.User;
 import com.viordache.store.repositories.UserRepository;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +36,13 @@ public class AuthenticationService {
         user.setEmail(registerUserDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
 
-        return userRepository.save(user);
+        try {
+            return userRepository.save(user);
+
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateKeyException(e.getMessage());
+        }
+
     }
 
     public User authenticate(LoginUserDto loginUserDto) {
