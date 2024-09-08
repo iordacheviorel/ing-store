@@ -1,8 +1,8 @@
 package com.viordache.store.services;
 
 
-import com.viordache.store.dtos.LoginUserDto;
-import com.viordache.store.dtos.RegisterUserDto;
+import com.viordache.store.dtos.LoginUserDTO;
+import com.viordache.store.dtos.RegisterUserDTO;
 import com.viordache.store.entities.Role;
 import com.viordache.store.entities.RoleEnum;
 import com.viordache.store.entities.User;
@@ -38,7 +38,7 @@ public class AuthenticationService {
         this.roleRepository = roleRepository;
     }
 
-    public User signUp(RegisterUserDto registerUserDto) {
+    public User signUp(RegisterUserDTO registerUserDto) {
 
         LOGGER.info("Signing up user: {}", registerUserDto.email());
         Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.USER);
@@ -64,7 +64,7 @@ public class AuthenticationService {
         }
     }
 
-    public User authenticate(LoginUserDto loginUserDto) {
+    public User authenticate(LoginUserDTO loginUserDto) {
 
         LOGGER.info("Authenticating user: {}", loginUserDto.email());
         authenticationManager.authenticate(

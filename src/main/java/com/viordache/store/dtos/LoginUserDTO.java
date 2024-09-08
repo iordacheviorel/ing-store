@@ -1,6 +1,6 @@
 package com.viordache.store.dtos;
 
-public record LoginUserDto (
+public record LoginUserDTO(
         String email,
         String password
 ) {}

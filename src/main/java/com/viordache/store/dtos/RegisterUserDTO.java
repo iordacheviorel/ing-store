@@ -1,6 +1,6 @@
 package com.viordache.store.dtos;
 
-public record RegisterUserDto(
+public record RegisterUserDTO(
     String email,
     String password,
     String fullName

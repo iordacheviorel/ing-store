@@ -1,7 +1,7 @@
 package com.viordache.store.controllers;
 
-import com.viordache.store.dtos.LoginUserDto;
-import com.viordache.store.dtos.RegisterUserDto;
+import com.viordache.store.dtos.LoginUserDTO;
+import com.viordache.store.dtos.RegisterUserDTO;
 import com.viordache.store.entities.User;
 import com.viordache.store.responses.LoginResponse;
 import com.viordache.store.services.AuthenticationService;
@@ -26,14 +26,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<User> register(@RequestBody RegisterUserDTO registerUserDto) {
         User registeredUser = authenticationService.signUp(registerUserDto);
 
         return ResponseEntity.ok(registeredUser);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDTO loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);

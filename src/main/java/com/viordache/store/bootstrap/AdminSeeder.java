@@ -1,6 +1,6 @@
 package com.viordache.store.bootstrap;
 
-import com.viordache.store.dtos.RegisterUserDto;
+import com.viordache.store.dtos.RegisterUserDTO;
 import com.viordache.store.entities.Role;
 import com.viordache.store.entities.RoleEnum;
 import com.viordache.store.entities.User;
@@ -37,7 +37,7 @@ public class AdminSeeder  implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void createSuperAdministrator() {
-        RegisterUserDto userDto = new RegisterUserDto(
+        RegisterUserDTO userDto = new RegisterUserDTO(
                 "Super Admin",
                 "super.admin@mail.com",
                 "123456");

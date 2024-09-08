@@ -1,7 +1,7 @@
 package com.viordache.store.controllers;
 
 
-import com.viordache.store.dtos.RegisterUserDto;
+import com.viordache.store.dtos.RegisterUserDTO;
 import com.viordache.store.entities.User;
 import com.viordache.store.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class AdminController {
 
     @PostMapping
     @PreAuthorize("hasRole('SUPER_ADMIN')")
-    public ResponseEntity<User> createAdministrator(@RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<User> createAdministrator(@RequestBody RegisterUserDTO registerUserDto) {
         User createdAdmin = userService.createAdmin(registerUserDto);
 
         return ResponseEntity.ok(createdAdmin);

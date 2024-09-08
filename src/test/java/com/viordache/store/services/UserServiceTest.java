@@ -1,6 +1,6 @@
 package com.viordache.store.services;
 
-import com.viordache.store.dtos.RegisterUserDto;
+import com.viordache.store.dtos.RegisterUserDTO;
 import com.viordache.store.entities.Role;
 import com.viordache.store.entities.RoleEnum;
 import com.viordache.store.entities.User;
@@ -58,7 +58,7 @@ class UserServiceTest {
     @Test
     void createAdmin_whenRoleDoesNotExist_shouldReturnNull() {
         // setup
-        RegisterUserDto registerUserDto = new RegisterUserDto(
+        RegisterUserDTO registerUserDto = new RegisterUserDTO(
                 "Admin User",
                 "admin@example.com",
                 "password"
@@ -79,7 +79,7 @@ class UserServiceTest {
     @Test
     void createAdmin_whenRoleExists_shouldCreateAndReturnAdminUser() {
         // setup
-        RegisterUserDto registerUserDto = new RegisterUserDto(
+        RegisterUserDTO registerUserDto = new RegisterUserDTO(
                 "Admin User",
                 "admin@example.com",
                 "password"

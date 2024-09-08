@@ -1,7 +1,7 @@
 package com.viordache.store.services;
 
 
-import com.viordache.store.dtos.RegisterUserDto;
+import com.viordache.store.dtos.RegisterUserDTO;
 import com.viordache.store.entities.Role;
 import com.viordache.store.entities.RoleEnum;
 import com.viordache.store.entities.User;
@@ -44,7 +44,7 @@ public class UserService {
         return users;
     }
 
-    public User createAdmin(RegisterUserDto registerUserDto) {
+    public User createAdmin(RegisterUserDTO registerUserDto) {
         LOGGER.info("Creating admin user {}", registerUserDto.email());
         Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.ADMIN);
 
