@@ -25,7 +25,8 @@ Includes authentication using JWT.
 
 # API Endpoints
 
-You can also import the endpoint collections in postman:
+### Postman
+The endpoints can be imported into Postman from
 [endpoints_postman_collection.json](endpoints_postman_collection.json)
 
 
@@ -52,7 +53,7 @@ http://localhost:8005
 
 ## Endpoints
 
-### 1. User Signup
+### 1. User SignUp
 
 **Endpoint:** `/auth/signup`  
 **Method:** POST  
