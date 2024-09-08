@@ -46,6 +46,7 @@ public class ItemController {
     }
 
     @PatchMapping("/{sku}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     public ResponseEntity<Item> updatePrice(@PathVariable String sku, @RequestBody Map<String, Object> updates) {
         Optional<Item> optionalItem = itemService.findItemBySku(sku);
 
