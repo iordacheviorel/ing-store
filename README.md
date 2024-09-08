@@ -15,7 +15,7 @@ Includes authentication using JWT.
      ```bash
      git clone https://github.com/iordacheviorel/ing-store.git
      cd ing-store
-     cd checkout master
+     git checkout master
      ```
   2. Build and run:
      ```bash
