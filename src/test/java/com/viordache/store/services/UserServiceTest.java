@@ -58,10 +58,11 @@ class UserServiceTest {
     @Test
     void createAdmin_whenRoleDoesNotExist_shouldReturnNull() {
         // setup
-        RegisterUserDto registerUserDto = new RegisterUserDto();
-        registerUserDto.setFullName("Admin User");
-        registerUserDto.setEmail("admin@example.com");
-        registerUserDto.setPassword("password");
+        RegisterUserDto registerUserDto = new RegisterUserDto(
+                "Admin User",
+                "admin@example.com",
+                "password"
+        );
 
         when(roleRepository.findByName(RoleEnum.ADMIN)).thenReturn(Optional.empty());
 
@@ -78,16 +79,17 @@ class UserServiceTest {
     @Test
     void createAdmin_whenRoleExists_shouldCreateAndReturnAdminUser() {
         // setup
-        RegisterUserDto registerUserDto = new RegisterUserDto();
-        registerUserDto.setFullName("Admin User");
-        registerUserDto.setEmail("admin@example.com");
-        registerUserDto.setPassword("password");
+        RegisterUserDto registerUserDto = new RegisterUserDto(
+                "Admin User",
+                "admin@example.com",
+                "password"
+        );
 
         Role adminRole = new Role();
         adminRole.setName(RoleEnum.ADMIN);
 
         when(roleRepository.findByName(RoleEnum.ADMIN)).thenReturn(Optional.of(adminRole));
-        when(passwordEncoder.encode(registerUserDto.getPassword())).thenReturn("encodedPassword");
+        when(passwordEncoder.encode(registerUserDto.password())).thenReturn("encodedPassword");
 
         User savedUser = new User();
         savedUser.setId(1); // mock ID after saving
@@ -110,7 +112,7 @@ class UserServiceTest {
         assertEquals(adminRole, result.getRole(), "The role should match the ADMIN role");
 
         verify(roleRepository, times(1)).findByName(RoleEnum.ADMIN);
-        verify(passwordEncoder, times(1)).encode(registerUserDto.getPassword());
+        verify(passwordEncoder, times(1)).encode(registerUserDto.password());
         verify(userRepository, times(1)).save(any(User.class));
     }
 }

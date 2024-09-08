@@ -45,7 +45,7 @@ public class UserService {
     }
 
     public User createAdmin(RegisterUserDto registerUserDto) {
-        LOGGER.info("Creating admin user {}", registerUserDto.getEmail());
+        LOGGER.info("Creating admin user {}", registerUserDto.email());
         Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.ADMIN);
 
         // TODO throw error?
@@ -55,9 +55,9 @@ public class UserService {
         }
 
         var user = new User();
-        user.setFullName(registerUserDto.getFullName());
-        user.setEmail(registerUserDto.getEmail());
-        user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
+        user.setFullName(registerUserDto.fullName());
+        user.setEmail(registerUserDto.email());
+        user.setPassword(passwordEncoder.encode(registerUserDto.password()));
         user.setRole(optionalRole.get());
 
         try {

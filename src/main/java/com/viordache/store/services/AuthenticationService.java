@@ -40,7 +40,7 @@ public class AuthenticationService {
 
     public User signUp(RegisterUserDto registerUserDto) {
 
-        LOGGER.info("Signing up user: {}", registerUserDto.getEmail());
+        LOGGER.info("Signing up user: {}", registerUserDto.email());
         Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.USER);
 
         if (optionalRole.isEmpty()) {
@@ -50,28 +50,28 @@ public class AuthenticationService {
         }
 
         var user = new User();
-        user.setFullName(registerUserDto.getFullName());
-        user.setEmail(registerUserDto.getEmail());
-        user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
+        user.setFullName(registerUserDto.fullName());
+        user.setEmail(registerUserDto.email());
+        user.setPassword(passwordEncoder.encode(registerUserDto.password()));
         user.setRole(optionalRole.get());
 
         try {
             return userRepository.save(user);
 
         } catch (DataIntegrityViolationException e) {
-            LOGGER.error("Integrity violation while saving user: {}", registerUserDto.getEmail());
+            LOGGER.error("Integrity violation while saving user: {}", registerUserDto.email());
             throw new DuplicateKeyException(e.getMessage());
         }
     }
 
     public User authenticate(LoginUserDto loginUserDto) {
 
-        LOGGER.info("Authenticating user: {}", loginUserDto.getEmail());
+        LOGGER.info("Authenticating user: {}", loginUserDto.email());
         authenticationManager.authenticate(
            new UsernamePasswordAuthenticationToken(
-                loginUserDto.getEmail(), loginUserDto.getPassword())
+                loginUserDto.email(), loginUserDto.password())
         );
 
-        return  userRepository.findByEmail(loginUserDto.getEmail()).orElseThrow();
+        return  userRepository.findByEmail(loginUserDto.email()).orElseThrow();
     }
 }
