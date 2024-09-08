@@ -1,0 +1,213 @@
+{
+  "info": {
+    "_postman_id": "b20f1e12-ac9f-4712-b389-21ffd097c841",
+    "name": "Store Endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "1294446"
+  },
+  "item": [
+    {
+      "name": "auth/signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"vio_6@mail.com\",\r\n  \"password\": \"123456\",\r\n  \"fullName\": \"Viorel Iordache 6\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8005/auth/signup"
+      },
+      "response": []
+    },
+    {
+      "name": "auth/admin",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyNTgxNjYzMSwiZXhwIjoxNzI1ODIwMjMxfQ.mFtFDkapEc5HKlkMVnRlqEP2AVVPvy7YrcZKAK3hWk0"
+          }
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"vio_admin_6@mail.com\",\r\n  \"password\": \"123456\",\r\n  \"fullName\": \"Viorel Iordache Admin 6\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8005/admins"
+      },
+      "response": []
+    },
+    {
+      "name": "auth/login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"super.admin@mail.com\",\r\n  \"password\": \"123456\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8005/auth/login"
+      },
+      "response": []
+    },
+    {
+      "name": "users/me",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyNTgwODEyMSwiZXhwIjoxNzI1ODExNzIxfQ.1Ez_4584OQAD1pDLOJcxajMSKxaiF9HD4_-pjvJooTM"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8005/users/me"
+      },
+      "response": []
+    },
+    {
+      "name": "users",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyNTgwODEyMSwiZXhwIjoxNzI1ODExNzIxfQ.1Ez_4584OQAD1pDLOJcxajMSKxaiF9HD4_-pjvJooTM"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8005/users"
+      },
+      "response": []
+    },
+    {
+      "name": "items/create",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyNTgxNjYzMSwiZXhwIjoxNzI1ODIwMjMxfQ.mFtFDkapEc5HKlkMVnRlqEP2AVVPvy7YrcZKAK3hWk0"
+          }
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"BLACK T-Shirt\",\r\n  \"description\": \"This is a BLAC T-Shirt.\",\r\n  \"quantity\": 101,\r\n  \"price\": 91.99,\r\n  \"sku\": \"TSBKMA101\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8005/items/create"
+      },
+      "response": []
+    },
+    {
+      "name": "items",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyNTgwODEyMSwiZXhwIjoxNzI1ODExNzIxfQ.1Ez_4584OQAD1pDLOJcxajMSKxaiF9HD4_-pjvJooTM"
+          }
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "url": "http://localhost:8005/items"
+      },
+      "response": []
+    },
+    {
+      "name": "items/{sku}",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyNTgxNjYzMSwiZXhwIjoxNzI1ODIwMjMxfQ.mFtFDkapEc5HKlkMVnRlqEP2AVVPvy7YrcZKAK3hWk0"
+          }
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"price\": 1110.004\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8005/items/TSBKMA101"
+      },
+      "response": []
+    },
+    {
+      "name": "items/{sku}",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyNTgxNjYzMSwiZXhwIjoxNzI1ODIwMjMxfQ.mFtFDkapEc5HKlkMVnRlqEP2AVVPvy7YrcZKAK3hWk0"
+          }
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "url": "http://localhost:8005/items/TSBKMA101"
+      },
+      "response": []
+    }
+  ]
+}
