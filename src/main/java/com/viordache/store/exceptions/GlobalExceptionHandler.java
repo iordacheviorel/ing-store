@@ -68,6 +68,18 @@ public class GlobalExceptionHandler {
                     "The resource has already been created.",
                     "The resource has already been created.");
 
+            case ItemNotFoundException e -> createProblemDetail(
+                    404,
+                    e.getMessage(),
+                    "The resource does not exist"
+            );
+
+            case IllegalArgumentException e -> createProblemDetail(
+                    400,
+                    e.getMessage(),
+                    "The argument passed to the request is invalid"
+            );
+
             default -> createProblemDetail(
                     500,
                     exception.getMessage(),

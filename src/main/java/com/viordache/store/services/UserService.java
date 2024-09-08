@@ -7,6 +7,8 @@ import com.viordache.store.entities.RoleEnum;
 import com.viordache.store.entities.User;
 import com.viordache.store.repositories.RoleRepository;
 import com.viordache.store.repositories.UserRepository;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +53,10 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
         user.setRole(optionalRole.get());
 
-        return userRepository.save(user);
+        try {
+            return userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateKeyException(e.getMessage());
+        }
     }
-
 }
