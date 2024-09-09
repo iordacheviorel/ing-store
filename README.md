@@ -4,10 +4,13 @@ A project which provides a basic CRUD API for store items.
 
 Includes authentication using JWT.
 
+**Work in progress:** Includes a lending module.
+
 ## **Prerequisites**
 - Java 21
 - Maven 3.9
 - Git
+- Docker
 
 ## **Installation**
 
@@ -17,11 +20,15 @@ Includes authentication using JWT.
      cd ing-store
      git checkout master
      ```
-  2. Build and run:
+  2. Setup MySQL DB:
      ```bash
-     mvn clean install
-     mvn spring-boot:run
+     docker run -d -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=store_db --name mysqldb-store -p 3308:3306 mysql:8.0
      ```
+  3. Build and run:
+       ```bash
+       mvn clean install
+       mvn spring-boot:run
+       ```
 
 # API Endpoints
 
