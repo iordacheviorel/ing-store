@@ -30,8 +30,6 @@ public class PMTCalculator {
                 loanAccount.getLoanProduct().getInterestRate(),
                 loanAccount.getLoanProduct().getInterestRateReviewUnit());
 
-        System.out.println("monthly_interest = " + monthlyInterest);
-
         BigDecimal growthFactor = BigDecimal.ONE.add(monthlyInterest).pow(12);
 
         return loanAccount.getPrincipalBalance().multiply(                          // PRINCIPAL *

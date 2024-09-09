@@ -12,6 +12,6 @@ class LoanSimulatorTest {
         loanSimulator.simulateCompoundInterestLoan();
 
         // GOOGLE SHEETS formula result
-        System.out.println("pmt = " + 87.91588723);
+//        System.out.println("pmt = " + 87.91588723);
     }
 }
