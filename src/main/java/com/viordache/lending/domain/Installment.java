@@ -34,10 +34,8 @@ public class Installment {
 
     @Override
     public String toString() {
-        // Define a date formatter for consistent date format
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-        // Format the output as a table row
         return String.format("\n %-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s, %-15s",
                 (dueDate != null) ? sdf.format(dueDate) : "N/A",
                 formatBigDecimal(totalAmountDue),

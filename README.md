@@ -4,7 +4,14 @@ A project which provides a basic CRUD API for store items.
 
 Includes authentication using JWT.
 
-**Work in progress:** Includes a lending module.
+### **Work in progress:** Includes a lending module.
+For now, [ScheduleCalculatorTests.java](src/test/java/com/viordache/lending/domain/calculators/ScheduleCalculatorTest.java) 
+tests the schedule at loan creation with the following scenario:
+- Declining Balance Equal Installments
+- Compound Interest
+- Principal = 1000
+- Interest = 10% per year
+- Period: 12 months, (payment monthly)
 
 ## **Prerequisites**
 - Java 21

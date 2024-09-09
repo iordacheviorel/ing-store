@@ -8,7 +8,6 @@ import java.math.RoundingMode;
 
 public class PMTCalculator {
 
-
     public static BigDecimal calculatePMT(LoanAccount loanAccount) {
 
         return switch (loanAccount.getLoanProduct().getInterestCalculationMethod()) {
@@ -16,7 +15,6 @@ public class PMTCalculator {
             case SIMPLE_INTEREST, CAPITALIZED_INTEREST -> BigDecimal.ZERO; // TODO
         };
     }
-
 
     /**
      * Compute the monthly expected payment using the PMT formula
