@@ -1,4 +1,4 @@
-# **ING Interview Project**
+# **Store Project**
 
 A project which provides a basic CRUD API for store items.
 
